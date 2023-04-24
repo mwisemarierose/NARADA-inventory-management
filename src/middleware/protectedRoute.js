@@ -23,10 +23,10 @@ export const verifyLogin = async (req, res, next) => {
 }
 
 export const checkAdmin = (req, res, next)  => {
-    // Check if user has an admin role
     if (req.user.role === 'admin') {
-      next(); // User is an admin, so continue to the next middleware or route handler
+      next(); 
     } else {
-      res.status(403).send('Access Denied'); // User is not an admin, so send a 403 Forbidden response
+      res.status(403).send('Access Denied'); 
     }
-  }
+}
+//
