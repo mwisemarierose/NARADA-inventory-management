@@ -14,6 +14,11 @@ const userSchema = new Schema({
       type: String,
       required: [true, 'Please! provide lastname.']
     },
+    deviceId: {
+      type: String,
+      required: [true, 'Please! provide deviceId.']
+    },
+
     email: {
       type: String,
     //   required: [true, 'Please! provide your email.'],
@@ -49,6 +54,6 @@ const userSchema = new Schema({
     }
   });
 
-  const User = model('Client', userSchema);
+  const User = model('user', userSchema);
 
-export default Client;
+export default User;

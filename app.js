@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoConnect from './src/database/config.js'
 import userRouter from "./src/routers/userRoute.js";
+import clientRouter from "./src/routers/clientRoute.js";
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -15,7 +16,7 @@ app.use(bodyParser.json({limit: '10mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 
 app.use("/user", userRouter);
-
+app.use("/client", clientRouter);
 
 app.get('/',(req,res) =>{
     res.status(200).json({
