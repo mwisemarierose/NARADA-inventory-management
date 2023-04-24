@@ -2,11 +2,12 @@
   "name": "narada",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec babel-node app.js",
-    "start": "node --experimental-specifier-resolution=node app.js"
+    "start": "node --experimental-specifier-resolution=node app.js",
+    "build": "rm -rf dist && babel ./src -d dist"
   },
   "author": "",
   "license": "ISC",
