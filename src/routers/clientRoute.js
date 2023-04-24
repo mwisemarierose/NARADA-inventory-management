@@ -4,6 +4,6 @@ import { checkAdmin } from "../middleware/protectedRoute.js";
 
 const router=express();
 
-router.post('/addNew',createClient)
+router.post('/addNew',checkAdmin,createClient)
 
 export default router;
