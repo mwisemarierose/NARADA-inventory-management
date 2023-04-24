@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "build": "node src --out-dir dist --source-maps inline --copy-files"
+    "start": "babel-node dist/index.js",
+    "build": "babel src --out-dir dist --source-maps inline --copy-files"
   },
   "author": "",
   "license": "ISC",
