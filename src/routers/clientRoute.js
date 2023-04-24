@@ -2,8 +2,8 @@ import express from "express";
 import { createClient } from "../controllers/clientController.js";
 import { checkAdmin } from "../middleware/protectedRoute.js";
 
-const routes=express();
+const router=express();
 
-routes.post('/addNew',createClient)
+router.post('/addNew',createClient)
 
-export default routes;
+export default router;
