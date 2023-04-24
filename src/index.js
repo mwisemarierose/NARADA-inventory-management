@@ -1,8 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
-import mongoConnect from './src/database/config.js'
-import userRouter from "./src/routers/userRoute.js";
-import clientRouter from "./src/routers/clientRoute.js";
+import mongoConnect from './database/config.js'
+import userRouter from "./routers/userRoute.js";
+import clientRouter from "./routers/clientRoute.js";
 import dotenv from 'dotenv'
 dotenv.config()
 
