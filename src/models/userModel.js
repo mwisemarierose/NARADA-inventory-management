@@ -16,6 +16,7 @@ const userSchema = new Schema({
     },
     deviceId: {
       type: String,
+      unique: true,
       required: [true, 'Please! provide deviceId.']
     },
 

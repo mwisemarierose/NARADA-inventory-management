@@ -6,7 +6,6 @@ export const verifyLogin = async (req, res, next) => {
         const verify = jwt.verify(token, 'api');
 
         if(verify){
-            req.user = verify;
             next();
         } else {
             res.status(401).json({
@@ -22,11 +21,23 @@ export const verifyLogin = async (req, res, next) => {
     }
 }
 
-export const checkAdmin = (req, res, next)  => {
-    if (req.user.role === 'admin') {
-      next(); 
-    } else {
-      res.status(403).send('Access Denied'); 
+// function to verify login and check the clirnt role if it is admin
+export const verifyAdmin = async (req, res, next) => {
+    try{
+        const token = req.headers.authorization.split(' ')[1];
+        const verify = jwt.verify(token, 'api');
+        if(verify.id.role ==='admin'){
+            next();
+        }
+    } catch(err) {
+        res.status(401).json({
+            status: 401,
+            message: 'You are not authorized to make this action'
+        });
     }
 }
-//
+
+
+
+
+

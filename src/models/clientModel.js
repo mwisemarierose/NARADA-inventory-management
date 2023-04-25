@@ -9,6 +9,7 @@ const clientSchema = new Schema({
       },
     deviceId: {
       type: String,
+      unique: true,
       required: [true, 'Please! provide deviceId.']
     },
     installationDate: {
@@ -60,14 +61,10 @@ const clientSchema = new Schema({
       nearby: {
         type: String,
         required: [true, 'Please! provide nearby place'],
-        
-      
       },
       coordinates: {
         type: String,
         required: [true, 'Please! provide coordinates'],
-        
-      
       },
   });
 

@@ -23,7 +23,6 @@ export const signup = async (req, res, next) => {
    return res.status(400).json({error:error.message})
 }
 }
- 
 export const signin = async (req, res) => {
   try {
     const { deviceId, password } = req.body;
