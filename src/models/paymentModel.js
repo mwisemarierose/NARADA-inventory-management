@@ -1,23 +1,24 @@
 import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema({
-  userId: {
-     type: mongoose.Schema.Types.ObjectId, ref: "User" 
-    },
-  Total: { 
-    type: Number, 
-    required: true 
-},
-  date: { 
-    type: Date, 
-    default: Date.now() 
-},
-  monthlyInstallment: { 
-    type: Number, 
-    required: true },
-  numberOfMonths: { 
+  clientId:{
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "client",
+  },
+  Total: {
     type: Number,
-     required: true },
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now(),
+  },
+  monthlyInstallment:[ {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "client",
+  }],
 });
 
 const Payment = mongoose.model("Payment", paymentSchema);

@@ -39,9 +39,9 @@ const clientSchema = new Schema({
       required: [true, 'Please! provide client Phone .'],
       minlength: 10,
     },
-    price: {
+    monthlyInstallment: {
         type: Number,
-        required: [true, 'Please! provide price.'],
+        required: [true, 'Please! provide installment amount.'],
       },
     
     district: {

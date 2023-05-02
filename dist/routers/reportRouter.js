@@ -1,0 +1,15 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var _express = _interopRequireDefault(require("express"));
+var _reportingController = require("../controllers/reportingController");
+var _protectedRoute = require("../middleware/protectedRoute.js");
+var router = (0, _express["default"])();
+router.get('/get/:_id', _reportingController.getPaymentReport);
+var _default = router;
+exports["default"] = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJfZXhwcmVzcyIsIl9pbnRlcm9wUmVxdWlyZURlZmF1bHQiLCJyZXF1aXJlIiwiX3JlcG9ydGluZ0NvbnRyb2xsZXIiLCJfcHJvdGVjdGVkUm91dGUiLCJyb3V0ZXIiLCJleHByZXNzIiwiZ2V0IiwiZ2V0UGF5bWVudFJlcG9ydCIsIl9kZWZhdWx0IiwiZXhwb3J0cyJdLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9yb3V0ZXJzL3JlcG9ydFJvdXRlci5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgZXhwcmVzcyBmcm9tIFwiZXhwcmVzc1wiO1xyXG5pbXBvcnQge2dldFBheW1lbnRSZXBvcnR9IGZyb20gXCIuLi9jb250cm9sbGVycy9yZXBvcnRpbmdDb250cm9sbGVyXCI7XHJcbmltcG9ydCB7IHZlcmlmeUxvZ2luIH0gZnJvbSBcIi4uL21pZGRsZXdhcmUvcHJvdGVjdGVkUm91dGUuanNcIjtcclxuXHJcbmNvbnN0IHJvdXRlcj1leHByZXNzKCk7XHJcblxyXG5yb3V0ZXIuZ2V0KCcvZ2V0LzpfaWQnLGdldFBheW1lbnRSZXBvcnQpXHJcblxyXG5cclxuXHJcbmV4cG9ydCBkZWZhdWx0IHJvdXRlcjsiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBQSxJQUFBQSxRQUFBLEdBQUFDLHNCQUFBLENBQUFDLE9BQUE7QUFDQSxJQUFBQyxvQkFBQSxHQUFBRCxPQUFBO0FBQ0EsSUFBQUUsZUFBQSxHQUFBRixPQUFBO0FBRUEsSUFBTUcsTUFBTSxHQUFDLElBQUFDLG1CQUFPLEdBQUU7QUFFdEJELE1BQU0sQ0FBQ0UsR0FBRyxDQUFDLFdBQVcsRUFBQ0MscUNBQWdCLENBQUM7QUFBQSxJQUFBQyxRQUFBLEdBSXpCSixNQUFNO0FBQUFLLE9BQUEsY0FBQUQsUUFBQSJ9
