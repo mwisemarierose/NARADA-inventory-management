@@ -5,6 +5,7 @@ export const createClient = async (req, res) => {
     const {
       username,
       deviceId,
+      totalAmount,
       sensor,
       battery,
       installationDate,
@@ -25,6 +26,7 @@ export const createClient = async (req, res) => {
       battery: battery,
       installationDate: installationDate,
       paymentDate: paymentDate,
+      totalAmount: totalAmount,
       naradaTel: naradaTel,
       monthlyInstallment : monthlyInstallment,
       phone: phone,
@@ -84,6 +86,15 @@ export const deleteClient = async (req, res) => {
   try {
     await Client.findByIdAndDelete(req.params._id);
     return res.status(200).json({ message: "Client deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
+//delete all clients
+export const deleteAllClients = async (req, res) => {
+  try {
+    await Client.deleteMany({});
+    return res.status(200).json({ message: "All clients deleted successfully" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

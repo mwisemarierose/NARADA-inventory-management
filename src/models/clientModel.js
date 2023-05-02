@@ -43,7 +43,10 @@ const clientSchema = new Schema({
         type: Number,
         required: [true, 'Please! provide installment amount.'],
       },
-    
+      totalAmount : {
+        type: Number,
+        required: [true, 'Please! provide total amount.'],
+      },
     district: {
       type: String,
       required: [true, 'Please! provide district'],

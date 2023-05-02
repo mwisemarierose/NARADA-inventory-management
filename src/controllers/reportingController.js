@@ -2,6 +2,7 @@ import Payment from "../models/paymentModel";
 
 export const getPaymentReport = async (req, res) => {
   try {
+    cl
     const payments = await Payment.findById( { clientId: req.params.clientId }).populate(
       "clientId",
       "username monthlyInstallment"
