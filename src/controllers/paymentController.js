@@ -4,34 +4,32 @@ import Payment from "../models/paymentModel";
 export const addPayment = async (req, res) => {
   try {
     const clientId = req.params.clientid
-    if(clientId === null || clientId === undefined){
+    if (clientId === null || clientId === undefined) {
       return res.status(404).json({ message: "Client not found" });
     }
     const inst = await Client.findById(clientId)
+    let { Amount, installment } = req.body
+    // const totalAmount = 6000000
+    const paymentPerMonth = 250000;
+    const overFlow = inst.overFlow
+    let remainingAmount = overFlow ? overFlow + Amount : Amount
+    console.log(inst, overFlow)
 
-    // console.log(inst.monthlyInstallment)
+    while (remainingAmount > paymentPerMonth) {
+      await Payment.create({ clientId, Amount: paymentPerMonth, installment })
 
-    const { Total  } = req.body
-    const monthlyInstallment = inst.monthlyInstallment
-    const installments = Total / monthlyInstallment
-    let remaining = installments
-
-    for (let i = 0; i < installments; i++) {
-      const installment = {
-        number: i,
-        amount: i === installments  ? remaining : monthlyInstallment,
+      remainingAmount = remainingAmount - Amount
+      installment = installment++
+      if (remainingAmount < paymentPerMonth) {
+        await Client.findByIdAndUpdate(req.params.clientid, { overFlow: remainingAmount })
       }
-  const response = await Payment.create({ clientId, Total})
-      console.log("response",response)
-      console.log("montlyinst",installment)
-      // remaining = remaining - monthlyInstallment
-      console.log("remaining",remaining)
+
     }
-    console.log("hereee",installments)
-    return res
-      .status(200)
-      .json({ message: "Payment added successfully" });
+    const response = await Payment.find({})
+    res.status(200).json(response)
+
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error: error.message });
   }
 };
