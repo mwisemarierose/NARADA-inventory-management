@@ -1,6 +1,40 @@
 import Client from "../models/clientModel";
 import Payment from "../models/paymentModel";
 
+// export const addPayment = async (req, res) => {
+//   try {
+//     const clientId = req.params.clientid
+//     if(clientId === null || clientId === undefined){
+//       return res.status(404).json({ message: "Client not found" });
+//     }
+//     const inst = await Client.findById(clientId)
+
+//     console.log(inst.monthlyInstallment)
+
+//     const { Total  } = req.body
+//     const monthlyInstallment = inst.monthlyInstallment
+//     const installments = Total / monthlyInstallment
+//     let remaining = installments
+
+//     for (let i = 0; i < installments; i++) {
+//       const installment = {
+//         number: i,
+//         amount: i === installments  ? remaining : monthlyInstallment,
+//       }
+//   const response = await Payment.create({ clientId, Total})
+//       console.log("response",response)
+//       console.log("montlyinst",installment)
+//       remaining = Math.floor(remaining - monthlyInstallment)
+//       console.log("remaining",remaining)
+//     }
+//     console.log("hereee",installments)
+//     return res
+//       .status(200)
+//       .json({ message: "Payment added successfully" });
+//   } catch (error) {
+//     return res.status(500).json({ error: error.message });
+//   }
+// };
 export const addPayment = async (req, res) => {
   try {
     const clientId = req.params.clientid
@@ -9,32 +43,27 @@ export const addPayment = async (req, res) => {
     }
     const inst = await Client.findById(clientId)
 
-    // console.log(inst.monthlyInstallment)
+    console.log(inst.monthlyInstallment)
 
     const { Total  } = req.body
     const monthlyInstallment = inst.monthlyInstallment
     const installments = Total / monthlyInstallment
-    let remaining = installments
 
-    for (let i = 0; i < installments; i++) {
-      const installment = {
-        number: i,
-        amount: i === installments  ? remaining : monthlyInstallment,
-      }
-  const response = await Payment.create({ clientId, Total})
-      console.log("response",response)
-      console.log("montlyinst",installment)
-      // remaining = remaining - monthlyInstallment
-      console.log("remaining",remaining)
+    const payment = {
+      clientId,
+      number: 1,
+      amount: Total,
     }
-    console.log("hereee",installments)
-    return res
-      .status(200)
-      .json({ message: "Payment added successfully" });
+    const response = await Payment.create(payment)
+    console.log("response", response)
+    
+    console.log("hereee", installments)
+    return res.status(200).json({ message: "Payment added successfully" });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
+
 //get all payments
 export const getAllPayments = async (req, res) => {
   try {
@@ -51,7 +80,7 @@ export const getPaymentByClientId = async (req, res) => {
   try {
     const payments = await Payment.find({ clientId: req.params.clientId }).populate(
       "clientId",
-      "username monthlyInstallment"
+      "username monthlyInstallment installationDate "
     );
     if (!payments) {
       return res.status(404).json({ message: "No payments found for this client." });
@@ -71,9 +100,15 @@ export const getPaymentByClientId = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 }
-
-
-
+//delete all payment records
+export const deleteAllPayment = async (req, res) => {
+  try {
+    await Payment.deleteMany({});
+    return res.status(200).json({ message: "All payment deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}
 
 
 

@@ -17,11 +17,6 @@ const paymentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
-  // monthlyInstallment: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: true,
-  //   ref: "client",
-  // },
 });
 
 const Payment = mongoose.model("Payment", paymentSchema);

@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
-    
 const clientSchema = new Schema({
     username: {
         type: String,
@@ -16,9 +15,9 @@ const clientSchema = new Schema({
         type: String,
         required: [true, 'Please! provide Installation Date.']
       },
-      paymentDate: {
+      paymentStartDate: {
         type: String,
-        required: [true, 'Please! provide payment Date.']
+        required: [true, 'Please! provide payment start Date.']
       },
       sensor: {
         type: Number,
