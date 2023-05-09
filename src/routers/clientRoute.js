@@ -5,7 +5,7 @@ import { verifyAdmin} from "../middleware/protectedRoute.js";
 const router=express();
 
 router.post('/addNew',createClient)
-router.get('/getAll',verifyAdmin,getAllClients)
+router.get('/getAll',getAllClients)
 router.get('/getOne/:_id',verifyAdmin,getOneClient)
 router.delete('/delete/:_id',verifyAdmin,deleteClient)
 router.delete('/deleteAll',deleteAllClients)

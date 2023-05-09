@@ -6,17 +6,19 @@ const paymentSchema = new mongoose.Schema({
     required: true,
     ref: "client",
   },
-  Total: {
+    Amount: {
     type: Number,
     required: true,
   },
   installment: {
     type: Number,
   },
+  
   date: {
     type: Date,
     default: Date.now(),
   },
+  
 });
 
 const Payment = mongoose.model("Payment", paymentSchema);
