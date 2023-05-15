@@ -66,3 +66,12 @@ export const getAllUsers = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+// get a single user
+export const getSingleUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params._id);
+    return res.status(200).json({ message: "Single user", user });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+}

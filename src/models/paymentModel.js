@@ -13,11 +13,22 @@ const paymentSchema = new mongoose.Schema({
   installment: {
     type: Number,
   },
+
+  nextPaymentDate: {
+    type: Date,
+    default: Date.now(),
+  },
+
+  fixedPaymentDay: {
+    type: Number,
+    default: 5,
+  },
   
   date: {
     type: Date,
     default: Date.now(),
   },
+
   
 });
 
