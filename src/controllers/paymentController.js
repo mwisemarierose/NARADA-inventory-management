@@ -64,55 +64,6 @@ export const addPayment = async (req, res) => {
   }
 };
 
-// export const addPayment = async (req, res) => {
-//   try {
-//     const clientId = req.params.clientid;
-//     if (clientId === null || clientId === undefined) {
-//       return res.status(404).json({ message: "Client not found" });
-//     }
-//     const inst = await Client.findById(clientId);
-//     let { Amount } = req.body;
-//     const paymentPerMonth = inst.monthlyInstallment;
-//     // console.log("inst", paymentPerMonth)
-
-//     const totalAmount = inst.totalAmount;
-//     const overFlow = inst.overFlow;
-//     let remainingAmount = overFlow ? overFlow + Amount : Amount;
-//     let installment = Math.ceil(remainingAmount / paymentPerMonth);
-//     console.log(inst, overFlow);
-//     let balance = remainingAmount % paymentPerMonth;
-//     if (balance !== 0) {
-//       await Client.findByIdAndUpdate(req.params.clientid, {
-//         overFlow: balance,
-//       });
-//     }
-//     while (remainingAmount > paymentPerMonth) {
-//       await Payment.create({ clientId, Amount: paymentPerMonth, installment });
-//       remainingAmount = remainingAmount - Amount;
-//       installment = installment++;
-//       // console.log(installment, "installment")
-//       if (remainingAmount < paymentPerMonth) {
-//         await Client.findByIdAndUpdate(req.params.clientid, {
-//           overFlow: remainingAmount,
-//         });
-//       }
-//     }
-//     const totalRemaining = totalAmount - Amount;
-//     console.log(totalRemaining, "totalRemaining");
-//     res.status(200).json({
-//       message: "Payment added successfully",
-//       payment: {
-//         amountpaid: Amount,
-//         installment,
-//         totalRemaining,
-//       },
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json({ error: error.message });
-//   }
-// };
-
 //get all payments
 export const getAllPayments = async (req, res) => {
   try {
