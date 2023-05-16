@@ -96,7 +96,7 @@ export const getPaymentByClientId = async (req, res) => {
   try {
     const payments = await Payment.find({
       clientId: req.params.clientId,
-    }).populate("clientId", "username monthlyInstallment installationDate ");
+    }).populate("clientId", "username monthlyInstallment installationDate totalAmount  totalRemaining ");
     if (!payments) {
       return res
         .status(404)
@@ -107,8 +107,8 @@ export const getPaymentByClientId = async (req, res) => {
       return {
         clientName: payment.clientId.username,
         monthlyInstallment: payment.clientId.monthlyInstallment,
-        Total: payment.Total,
-        month: payment.date,
+        totalAmount: payment.clientId.totalAmount,
+        totalRemaining: payment.clientId.totalRemaining,
       };
     });
 
@@ -128,3 +128,6 @@ export const deleteAllPayment = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+
+
