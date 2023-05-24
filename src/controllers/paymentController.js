@@ -121,7 +121,7 @@ export const getPaymentByClientId = async (req, res) => {
 export const deleteAllPayment = async (req, res) => {
   try {
     await Payment.deleteMany({});
-    return res
+    return res 
       .status(200)
       .json({ message: "All payment deleted successfully" });
   } catch (error) {
