@@ -60,6 +60,7 @@ export const signin = async (req, res) => {
       message: "you are logged in successfully",
       status: 200,
       token: compare.generateToken(user),
+      user:user
     });
   } catch (error) {
 console.log(error)
