@@ -60,8 +60,13 @@ const clientSchema = new Schema({
   sector: {
     type: String,
     required: [true, 'Please! provide sector'],
-
   },
+  role: {
+    type: String,
+    enum: ['client', 'admin'],
+    default: 'client'
+  }
+  ,
   cell: {
     type: String,
     required: [true, 'Please! provide cell'],
