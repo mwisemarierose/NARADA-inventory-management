@@ -1,3 +1,4 @@
+import { get } from "core-js/core/dict";
 import Client from "../models/clientModel";
 import Payment from "../models/paymentModel";
 
@@ -91,27 +92,29 @@ export const getAllPayments = async (req, res) => {
     return { error: error.message };
   }
 };
+//get payment by client id and populate client details including total amount and total remaining amount 
+
 
 export const getPaymentByClientId = async (req, res) => {
   try {
     const payments = await Payment.find({
       clientId: req.params.clientId,
     }).populate("clientId", "username monthlyInstallment installationDate totalAmount  totalRemaining ");
+    
     if (!payments) {
       return res
         .status(404)
         .json({ message: "No payments found for this client." });
     }
-
     const report = payments.map((payment) => {
       return {
+        Amount: payment.clientId.amount,
         clientName: payment.clientId.username,
         monthlyInstallment: payment.clientId.monthlyInstallment,
         totalAmount: payment.clientId.totalAmount,
         totalRemaining: payment.clientId.totalRemaining,
       };
     });
-
     return res.status(200).json({ report });
   } catch (error) {
     return res.status(500).json({ error: error.message });
