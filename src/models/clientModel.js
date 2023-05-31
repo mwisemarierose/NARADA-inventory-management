@@ -76,9 +76,13 @@ const clientSchema = new Schema({
     type: String,
     required: [true, 'Please! provide nearby place'],
   },
-  coordinates: {
+  latitude: {
     type: String,
-    required: [true, 'Please! provide coordinates'],
+    required: [true, 'Please! provide latitude'],
+  },
+  longitude: {
+    type: String,
+    required: [true, 'Please! provide longitude'],
   },
   overFlow: {
     type: Number,

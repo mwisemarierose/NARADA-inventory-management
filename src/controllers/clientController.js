@@ -19,7 +19,8 @@ export const createClient = async (req, res) => {
       sector,
       cell,
       nearby,
-      coordinates,
+      latitude,
+      longitude,
     } = req.body;
     const client = await Client.create({
       username: username,
@@ -36,7 +37,8 @@ export const createClient = async (req, res) => {
       sector: sector,
       cell: cell,
       nearby: nearby,
-      coordinates: coordinates,
+      latitude: latitude,
+      longitude: longitude,
     });
 
     return res.status(200).json({ message: "Client created successfully",client });

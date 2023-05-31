@@ -1,11 +1,11 @@
 import express from "express";
 import {addPayment,getAllPayments,getPaymentByClientId ,deleteAllPayment} from '../controllers/paymentController.js'
-import { verifyLogin } from "../middleware/protectedRoute.js";
+import { verifyLogin ,verifyAdmin } from "../middleware/protectedRoute.js";
 
 const router=express();
 
-router.post('/add/:clientid',addPayment)
-router.get('/getAll',getAllPayments)
+router.post('/add/:clientid',verifyAdmin,addPayment)
+router.get('/getAll',verifyAdmin,getAllPayments)
 router.get('/getOne/:clientId',getPaymentByClientId)
 router.delete('/deleteAll',deleteAllPayment)
 

@@ -1,4 +1,4 @@
-import { get } from "core-js/core/dict";
+
 import Client from "../models/clientModel";
 import Payment from "../models/paymentModel";
 
@@ -23,9 +23,10 @@ export const addPayment = async (req, res) => {
     const lastPayment = await getLastPaymentByClientId(clientId);
 
     // get next payment date * installment number
+    console.log(lastPayment)
     const nextPaymentDate = new Date(
-      lastPayment.nextPaymentDate.setMonth(
-        lastPayment.nextPaymentDate.getMonth() + installment
+      new Date(lastPayment.nextPaymentDate).setMonth(
+        new Date(lastPayment.nextPaymentDate).getMonth() + installment
       )
     );
 
@@ -99,23 +100,29 @@ export const getPaymentByClientId = async (req, res) => {
   try {
     const payments = await Payment.find({
       clientId: req.params.clientId,
-    }).populate("clientId", "username monthlyInstallment installationDate totalAmount  totalRemaining ");
+    }).populate("clientId", "username amount monthlyInstallment installationDate totalAmount  totalRemaining ");
     
     if (!payments) {
       return res
         .status(404)
         .json({ message: "No payments found for this client." });
     }
-    const report = payments.map((payment) => {
-      return {
-        Amount: payment.clientId.amount,
-        clientName: payment.clientId.username,
-        monthlyInstallment: payment.clientId.monthlyInstallment,
-        totalAmount: payment.clientId.totalAmount,
-        totalRemaining: payment.clientId.totalRemaining,
-      };
-    });
-    return res.status(200).json({ report });
+    let previousTotalRemaining = 0, reports=[];
+    for (let i = 0; i < payments.length; i++) {
+      let rem = payments[i].Amount + previousTotalRemaining;
+      reports = [...reports, {
+        amount: payments[i].Amount,
+        Date: payments[i].date,
+        clientName: payments[i].clientId.username,
+        monthlyInstallment: payments[i].clientId.monthlyInstallment,
+        totalAmount: payments[i].clientId.totalAmount,
+        totalRemaining: payments[i].clientId.totalAmount - rem,
+      }];
+
+      previousTotalRemaining = rem;
+    }
+
+    return res.status(200).json({ reports });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
