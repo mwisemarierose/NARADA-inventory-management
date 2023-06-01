@@ -100,8 +100,8 @@ export const getPaymentByClientId = async (req, res) => {
   try {
     const payments = await Payment.find({
       clientId: req.params.clientId,
-    }).populate("clientId", "username amount monthlyInstallment installationDate totalAmount  totalRemaining ");
-    
+    }).populate("clientId", "username amount nextPaymentDate monthlyInstallment installationDate totalAmount  totalRemaining ");
+    console.log(payments);
     if (!payments) {
       return res
         .status(404)
@@ -113,6 +113,7 @@ export const getPaymentByClientId = async (req, res) => {
       reports = [...reports, {
         amount: payments[i].Amount,
         Date: payments[i].date,
+        nextPaymentDate: payments[i].nextPaymentDate,
         clientName: payments[i].clientId.username,
         monthlyInstallment: payments[i].clientId.monthlyInstallment,
         totalAmount: payments[i].clientId.totalAmount,
