@@ -114,7 +114,7 @@ export const getPaymentByClientId = async (req, res) => {
         amount: payments[i].Amount,
         Date: payments[i].date,
         nextPaymentDate: payments[i].nextPaymentDate,
-        clientName: payments[i].clientId.username,
+        username: payments[i].clientId.username,
         monthlyInstallment: payments[i].clientId.monthlyInstallment,
         totalAmount: payments[i].clientId.totalAmount,
         totalRemaining: payments[i].clientId.totalAmount - rem,
